@@ -28,16 +28,34 @@ input::-webkit-inner-spin-button {
 .mins,
 .secs {
   text-align: center;
+  color: #83c5e9;
 }
 
 span {
   display: block;
   padding: 1vw;
+  letter-spacing: 1px;
 }
 
 .btn {
   display: flex;
   justify-content: center;
+  /**animation: bounce;**/
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  position: relative;
+}
+
+@keyframes bounce {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 100px;
+  }
+  100% {
+    top: 0px;
+  }
 }
 
 input {
@@ -45,4 +63,13 @@ input {
   text-align: center;
   width: 100%;
   font-size: 5rem;
+  color: #83c5e9;
+}
+
+.btn-start {
+  background: transparent;
+  border: 2px solid #83c5e9;
+  font-size: 20px;
+  letter-spacing: 2px;
+  cursor: pointer;
 }
