@@ -1,6 +1,5 @@
 class Timer {
   form = document.querySelector(".btn > button");
-  timerId;
   constructor() {
     this.days = document.querySelector(".days > input");
     this.hours = document.querySelector(".hours > input");
@@ -33,8 +32,19 @@ class Timer {
 
   _resetPage() {
     this._renderPage(NaN);
+    this._changeAttribute();
+  }
+  _changeAttribute() {
+    [this.days, this.hours, this.mins, this.secs].map((el) => {
+      if (el.getAttribute("readonly")) {
+        el.removeAttribute("readonly");
+      } else {
+        el.setAttribute("readonly", true);
+      }
+    });
   }
   _startCountdown() {
+    this._changeAttribute();
     const timerId = setInterval(() => {
       const currentValue = this.countValue - new Date().getTime();
       const days = Math.floor(currentValue / (1000 * 60 * 60 * 24));
