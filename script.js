@@ -1,15 +1,35 @@
 class Timer {
-  form = document.querySelector(".btn > button");
+  btn = document.querySelector(".btn > button");
   constructor() {
     this.days = document.querySelector(".days > input");
     this.hours = document.querySelector(".hours > input");
     this.mins = document.querySelector(".mins > input");
     this.secs = document.querySelector(".secs > input");
+    this.inputs = document.querySelectorAll("input");
     this.countValue;
+    this.checkInput();
     this.clickOnButton();
   }
+
+  checkInput() {
+    const warningSpan = document.createElement("span");
+    warningSpan.innerHTML = "enter the correct value 0-60";
+    this.inputs.forEach((el) => {
+      el.oninput = function () {
+        if (
+          isNaN(el.valueAsNumber) ||
+          el.valueAsNumber < 0 ||
+          el.valueAsNumber > 60
+        ) {
+          el.after(warningSpan);
+        } else {
+          warningSpan.remove();
+        }
+      };
+    });
+  }
   clickOnButton() {
-    this.form.addEventListener("click", () => {
+    this.btn.addEventListener("click", () => {
       this.countValue = this._getCountValue();
       this._startCountdown();
     });
