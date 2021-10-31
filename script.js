@@ -13,17 +13,37 @@ class Timer {
 
   checkInput() {
     const warningSpan = document.createElement("span");
-    warningSpan.innerHTML = "enter the correct value 0-60";
-    this.inputs.forEach((el) => {
-      el.oninput = function () {
+    const _insertWarningSpan = function (valMin, valMax) {
+      warningSpan.innerHTML = `correct value ${valMin} - ${valMax}`;
+      return warningSpan;
+    };
+    const _checkValues = function (el, valName, valMin, valMax) {
+      if (el.name == valName) {
+        console.log(2);
         if (
           isNaN(el.valueAsNumber) ||
-          el.valueAsNumber < 0 ||
-          el.valueAsNumber > 60
+          el.valueAsNumber < valMin ||
+          el.valueAsNumber > valMax
         ) {
-          el.after(warningSpan);
+          console.log(1);
+          return true;
+        }
+      }
+    };
+    this.inputs.forEach((el) => {
+      el.oninput = function () {
+        //console.log(warningSpan);
+        if (_checkValues(el, "days", 0, 100)) {
+          el.after(_insertWarningSpan(0, 100));
+        } else if (_checkValues(el, "hours", 0, 24)) {
+          el.after(_insertWarningSpan(0, 26));
+        } else if (_checkValues(el, "mins", 0, 60)) {
+          el.after(_insertWarningSpan(0, 60));
+        } else if (_checkValues(el, "secs", 0, 60)) {
+          el.after(_insertWarningSpan(0, 60));
         } else {
           warningSpan.remove();
+          console.log(warningSpan);
         }
       };
     });
