@@ -40,10 +40,13 @@ span {
 .btn {
   display: flex;
   justify-content: center;
-  /**animation: bounce;**/
+  position: relative;
+}
+
+.btn-active {
+  animation: bounce;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-  position: relative;
 }
 
 @keyframes bounce {
