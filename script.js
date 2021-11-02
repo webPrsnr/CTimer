@@ -1,5 +1,5 @@
 class Timer {
-  btn = document.querySelector(".btn > button");
+  btn = document.querySelector(".btn");
   constructor() {
     this.days = document.querySelector(".days > input");
     this.hours = document.querySelector(".hours > input");
@@ -19,7 +19,6 @@ class Timer {
     };
     const _checkValues = function (el, valName, valMin, valMax) {
       if (el.name == valName) {
-        console.log(2);
         if (
           isNaN(el.valueAsNumber) ||
           el.valueAsNumber < valMin ||
@@ -41,16 +40,22 @@ class Timer {
           el.after(_insertWarningSpan(0, 60));
         } else {
           warningSpan.remove();
-          console.log(warningSpan);
         }
       };
     });
   }
   clickOnButton() {
-    this.btn.addEventListener("click", () => {
+    this.btn.children[0].addEventListener("click", () => {
       this.countValue = this._getCountValue();
+      this._ticking();
       this._startCountdown();
     });
+  }
+
+  _ticking() {
+    if (this.btn.classList.toggle("btn-active")) {
+      this.btn.children[0].innerHTML = "ticking";
+    } else this.btn.children[0].innerHTML = "start";
   }
   _getCountValue() {
     return (
@@ -70,6 +75,7 @@ class Timer {
 
   _resetPage() {
     this._renderPage(NaN);
+    this._ticking();
     this._changeAttribute();
   }
   _changeAttribute() {
