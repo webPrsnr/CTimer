@@ -25,18 +25,16 @@ class Timer {
           el.valueAsNumber < valMin ||
           el.valueAsNumber > valMax
         ) {
-          console.log(1);
           return true;
         }
       }
     };
     this.inputs.forEach((el) => {
       el.oninput = function () {
-        //console.log(warningSpan);
         if (_checkValues(el, "days", 0, 100)) {
           el.after(_insertWarningSpan(0, 100));
         } else if (_checkValues(el, "hours", 0, 24)) {
-          el.after(_insertWarningSpan(0, 26));
+          el.after(_insertWarningSpan(0, 24));
         } else if (_checkValues(el, "mins", 0, 60)) {
           el.after(_insertWarningSpan(0, 60));
         } else if (_checkValues(el, "secs", 0, 60)) {
