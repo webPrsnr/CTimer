@@ -91,7 +91,7 @@ class Timer {
     });
   }
   _startCountdown() {
-    //this._changeAttribute();
+    this._changeAttribute();
     const timerId = setInterval(() => {
       const currentValue = this.countValue - new Date().getTime();
       const days = Math.floor(currentValue / (1000 * 60 * 60 * 24));
