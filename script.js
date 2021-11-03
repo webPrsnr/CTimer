@@ -6,6 +6,9 @@ class Timer {
     this.mins = document.querySelector(".mins > input");
     this.secs = document.querySelector(".secs > input");
     this.inputs = document.querySelectorAll("input");
+    this.inputs.forEach((el) => {
+      el.readOnly = false;
+    });
     this.countValue;
     this.checkInput();
     this.clickOnButton();
@@ -80,15 +83,15 @@ class Timer {
   }
   _changeAttribute() {
     [this.days, this.hours, this.mins, this.secs].map((el) => {
-      if (el.getAttribute("readonly")) {
-        el.removeAttribute("readonly");
+      if (el.readOnly) {
+        el.readOnly = false;
       } else {
-        el.setAttribute("readonly", true);
+        el.readOnly = true;
       }
     });
   }
   _startCountdown() {
-    this._changeAttribute();
+    //this._changeAttribute();
     const timerId = setInterval(() => {
       const currentValue = this.countValue - new Date().getTime();
       const days = Math.floor(currentValue / (1000 * 60 * 60 * 24));
