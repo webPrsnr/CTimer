@@ -14,7 +14,7 @@ class Timer {
   checkInput() {
     const warningSpan = document.createElement("span");
     const _insertWarningSpan = function (valMin, valMax) {
-      warningSpan.innerHTML = `correct value ${valMin} - ${valMax}`;
+      warningSpan.textContent = `correct value ${valMin} - ${valMax}`;
       return warningSpan;
     };
     const _checkValues = function (el, valName, valMin, valMax) {
