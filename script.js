@@ -9,7 +9,6 @@ class Timer {
     this.inputs.forEach((el) => {
       el.readOnly = false;
     });
-    this.countValue;
     this.checkInput();
     this.clickOnButton();
   }
@@ -49,9 +48,9 @@ class Timer {
   }
   clickOnButton() {
     this.btn.children[0].addEventListener("click", () => {
-      this.countValue = this._getCountValue();
+      const countValue = this._getCountValue();
       this._ticking();
-      this._startCountdown();
+      this._startCountdown(countValue);
     });
   }
 
@@ -90,10 +89,10 @@ class Timer {
       }
     });
   }
-  _startCountdown() {
+  _startCountdown(countValue) {
     this._changeAttribute();
     const timerId = setInterval(() => {
-      const currentValue = this.countValue - new Date().getTime();
+      const currentValue = countValue - new Date().getTime();
       const days = Math.floor(currentValue / (1000 * 60 * 60 * 24));
       const hours = Math.floor(
         (currentValue % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
