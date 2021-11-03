@@ -1,11 +1,12 @@
 class Timer {
-  btn = document.querySelector(".btn");
-  constructor() {
+  constructor(wrapper) {
+    this.displayPage(wrapper);
     this.days = document.querySelector(".days > input");
     this.hours = document.querySelector(".hours > input");
     this.mins = document.querySelector(".mins > input");
     this.secs = document.querySelector(".secs > input");
     this.inputs = document.querySelectorAll("input");
+    this.btn = document.querySelector(".btn");
     this.inputs.forEach((el) => {
       el.readOnly = false;
     });
@@ -52,6 +53,44 @@ class Timer {
       this._ticking();
       this._startCountdown(countValue);
     });
+  }
+
+  displayPage(htmlElement) {
+    let wrapper = document.querySelector(htmlElement);
+    _makeHtmlButton(wrapper);
+    let div = _makeHtmlDiv(wrapper, "form-container");
+    ["days", "hours", "mins", "secs"].forEach((el) => {
+      _makeHtmlInput(div, el);
+    });
+
+    function _makeHtmlButton(htmlEl) {
+      const div = _makeHtmlDiv(htmlEl, "btn");
+      const btn = document.createElement("button");
+      btn.className = "btn-start";
+      btn.textContent = "button";
+      div.append(btn);
+    }
+    function _makeHtmlDiv(htmlEl, className) {
+      const div = document.createElement("div");
+      div.className = className;
+      htmlEl.append(div);
+      return div;
+    }
+    function _makeHtmlInput(htmlEl, name) {
+      const div = _makeHtmlDiv(htmlEl, name);
+      const input = document.createElement("input");
+      div.append(input);
+      htmlEl.append(div);
+      input.type = "number";
+      input.name = name;
+      input.placeholder = "00";
+      _makeHtmlSpan(div, name);
+    }
+    function _makeHtmlSpan(htmlEl, text) {
+      const span = document.createElement("span");
+      span.textContent = text;
+      htmlEl.append(span);
+    }
   }
 
   _ticking() {
@@ -110,4 +149,4 @@ class Timer {
   }
 }
 
-const timer = new Timer();
+const timer = new Timer(".wrapper");
