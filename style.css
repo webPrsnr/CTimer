@@ -17,6 +17,7 @@ input::-webkit-inner-spin-button {
   justify-content: center;
   align-items: center;
   height: 90vh;
+  flex-direction: column;
 }
 
 .form-container {
