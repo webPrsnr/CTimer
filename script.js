@@ -54,8 +54,8 @@ class Timer {
 
   _ticking() {
     if (this.btn.classList.toggle("btn-active")) {
-      this.btn.children[0].innerHTML = "ticking";
-    } else this.btn.children[0].innerHTML = "start";
+      this.btn.children[0].textContent = "ticking";
+    } else this.btn.children[0].textContent = "start";
   }
   _getCountValue() {
     return (
