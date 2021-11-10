@@ -130,7 +130,7 @@ class Timer {
   }
   _startCountdown(countValue) {
     this._changeAttribute();
-    const timerId = setInterval(() => {
+    let countDownStep = () => {
       const currentValue = countValue - new Date().getTime();
       const days = Math.floor(currentValue / (1000 * 60 * 60 * 24));
       const hours = Math.floor(
@@ -145,7 +145,9 @@ class Timer {
         clearInterval(timerId);
         this._resetPage();
       }
-    }, 1000);
+    };
+    countDownStep();
+    const timerId = setInterval(countDownStep, 1000);
   }
 }
 
